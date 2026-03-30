@@ -3,10 +3,10 @@ public class ARGB {
     public int alpha, red, green, blue;
 
     public ARGB(int pixel) {
-        this.alpha = (pixel >> 24) & 255;
-        this.red = (pixel >> 16) & 255;
-        this.green = (pixel >> 8) & 255;
-        this.blue = pixel & 255;
+        this.alpha = (pixel >> 24) & 0xff;
+        this.red = (pixel >> 16) & 0xff;
+        this.green = (pixel >> 8) & 0xff;
+        this.blue = pixel & 0xff;
     }
 
     public ARGB(int a, int r, int g, int b) {
@@ -17,6 +17,6 @@ public class ARGB {
     }
 
     public int toInt() {
-        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+        return (this.alpha << 24) | (this.red << 16) | (this.green << 8) | blue;
     }
 }

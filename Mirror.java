@@ -13,7 +13,7 @@ public class Mirror extends Converter {
 
                 int pixel = input.getRGB(x, y);
 
-                // flip horizontally
+                // flips it  horizontally
                 output.setRGB(width - 1 - x, y, pixel);
             }
         }

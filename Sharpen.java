@@ -1,13 +1,12 @@
 import java.awt.image.BufferedImage;
 
-public class Blur extends Converter{
-
+public class Sharpen extends Converter {
     @Override
     protected void processImage(BufferedImage input, BufferedImage output) {
 
         int width = input.getWidth();
         int height = input.getHeight();
-
+        
         // copy original image first
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -31,13 +30,18 @@ public class Blur extends Converter{
                     }
                 }
 
-                int r = sumR/9;
-                int g = sumG/9;
-                int b = sumB/9;
+                int detailR = sumR/9;
+                int detailG = sumG/9;
+                int detailB = sumB/9;
 
-                int alpha = new ARGB(input.getRGB(x, y)).alpha;
+                int pixel = input.getRGB(x, y);
+                ARGB color = new ARGB(pixel);
 
-                ARGB newColor = new ARGB(alpha, r, g, b);
+                int r = Math.max(0, Math.min(255, color.red + (color.red - detailR)));
+                int g = Math.max(0, Math.min(255, color.green + (color.green - detailG)));
+                int b = Math.max(0, Math.min(255, color.blue + (color.blue - detailB)));
+
+                ARGB newColor = new ARGB(color.alpha, r, g, b);
                 output.setRGB(x, y, newColor.toInt());
             }
         }

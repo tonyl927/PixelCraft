@@ -14,7 +14,7 @@ public class RecursiveGray extends Converter {
 
         int total = width * height;
 
-        // base case
+        // the base case
         if (index >= total)
             return;
 
